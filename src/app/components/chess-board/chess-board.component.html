@@ -1,0 +1,9 @@
+<ngx-chess-board
+  #board
+  [darkTileColor]="'#b58863'"
+  [lightTileColor]="'#f0d9b5'"
+  [size]="500"
+  [darkDisabled]="isWhitePlayer"
+  [lightDisabled]="!isWhitePlayer"
+  (moveChange)="onMoveChange()"
+></ngx-chess-board>
