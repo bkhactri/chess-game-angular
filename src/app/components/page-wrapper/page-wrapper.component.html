@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+  <span>Quick Chess Game</span>
+  <span class="spacer"></span>
+  <button mat-raised-button color="accent" (click)="toggleMode()">
+    Switch to {{ isOnlineMode ? "Offline" : "Online" }} Mode
+  </button>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

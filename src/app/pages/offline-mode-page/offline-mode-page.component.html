@@ -1,0 +1,35 @@
+<div class="offline-mode-container">
+  <h2>Chess Game Offline Mode</h2>
+
+  <div class="offline-mode-turn">
+    <div *ngIf="isGameEnd; else showTurn">
+      <span>
+        <b>{{ winner }} player</b> is the winner
+      </span>
+    </div>
+    <ng-template #showTurn>
+      <span>
+        Turn: <b>{{ PLAYER_DISPLAY_NAME[currentTurn] }} player</b>
+      </span>
+    </ng-template>
+  </div>
+
+  <mat-card>
+    <div class="offline-mode-iframe">
+      <div class="offline-mode-iframe_wrapper">
+        <iframe #light_board [src]="lightBoardIframeUrl"></iframe>
+        <span class="offline-mode-iframe_player">White player</span>
+      </div>
+      <div class="offline-mode-iframe_wrapper">
+        <iframe #dark_board [src]="darkBoardIframeUrl"></iframe>
+        <span class="offline-mode-iframe_player">Black player</span>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="offline-mode-tools">
+    <button mat-raised-button color="accent" (click)="handleStartNewGame()">
+      Start new game
+    </button>
+  </div>
+</div>
