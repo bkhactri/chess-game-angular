@@ -7,7 +7,6 @@ import { PageWrapperComponent } from './components/page-wrapper/page-wrapper.com
 
 const routes: Routes = [
   { path: '', redirectTo: '/offline', pathMatch: 'full' },
-  { path: 'chess-board', component: ChessBoardComponent },
   {
     path: '',
     component: PageWrapperComponent,
@@ -16,6 +15,7 @@ const routes: Routes = [
       { path: 'online', component: OnlineModePageComponent },
     ],
   },
+  { path: 'chess-board', component: ChessBoardComponent },
 ];
 
 @NgModule({

@@ -14,6 +14,13 @@ import { OnlineModePageComponent } from './pages/online-mode-page/online-mode-pa
 import { ChessBoardComponent } from './components/chess-board/chess-board.component';
 import { PageWrapperComponent } from './components/page-wrapper/page-wrapper.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { environment } from './environments/environment';
+import { OnlineOperationService } from './services/online-operation.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,8 +40,16 @@ import { PageWrapperComponent } from './components/page-wrapper/page-wrapper.com
     MatCardModule,
     MatToolbarModule,
     MatSnackBarModule,
+
+    // Firebase
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
+
+    // Form
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [OnlineOperationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
