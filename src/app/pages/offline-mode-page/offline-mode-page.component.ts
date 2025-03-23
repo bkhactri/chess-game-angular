@@ -2,7 +2,7 @@ import { PLAYER_DISPLAY_NAME } from './../../constants/game.constant';
 import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HistoryMove } from 'ngx-chess-board';
-import { PLAYER } from 'src/app/types/game.type';
+import { Player } from 'src/app/types/game.type';
 
 @Component({
   selector: 'offline-mode-page',
@@ -18,7 +18,7 @@ export class OfflineModePageComponent implements AfterViewInit {
   readonly PLAYER_DISPLAY_NAME = PLAYER_DISPLAY_NAME;
   lightBoardIframeUrl: SafeResourceUrl = '';
   darkBoardIframeUrl: SafeResourceUrl = '';
-  currentTurn: PLAYER = 'white';
+  currentTurn: Player = 'white';
   winner: string = '';
   isGameEnd: boolean = false;
 
@@ -38,7 +38,7 @@ export class OfflineModePageComponent implements AfterViewInit {
     window.addEventListener('message', (event: { data: HistoryMove }) => {
       if (event.data.mate) {
         // Game is end
-        this.winner = PLAYER_DISPLAY_NAME[event.data.color as PLAYER];
+        this.winner = PLAYER_DISPLAY_NAME[event.data.color as Player];
         this.isGameEnd = true;
       }
 

@@ -1,5 +1,80 @@
-<div class="container">
-  <mat-card>
-    <mat-card-title>Chess game - online mode</mat-card-title>
-  </mat-card>
+<div class="online-mode-container">
+  <h2>Chess Game Online Mode</h2>
+
+  <div *ngIf="!gameCode" class="online-mode-lobby">
+    <button mat-raised-button color="primary" (click)="handleCreateGame()">
+      Create Game
+    </button>
+    <span style="text-align: center">or</span>
+    <form
+      [formGroup]="infoForm"
+      (ngSubmit)="handleJoinGame()"
+      class="online-mode-form"
+    >
+      <label for="gameCode" style="text-align: center; font-size: 20px">
+        Enter game code
+      </label>
+      <input matInput type="text" id="gameCode" formControlName="gameCode" />
+      <span
+        *ngIf="
+          infoForm.get('gameCode')?.invalid && infoForm.get('gameCode')?.touched
+        "
+        style="font-size: 14px; color: red; text-align: center"
+      >
+        Game code is required
+      </span>
+
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="infoForm.invalid"
+      >
+        Join
+      </button>
+    </form>
+  </div>
+
+  <div *ngIf="gameCode && !isGameEnd" class="online-mode-information">
+    <span *ngIf="!competitorId"> Waiting for competitor</span>
+    <span *ngIf="isYourTurn && competitorId" style="color: red">
+      <strong>Your turn</strong>
+    </span>
+    <span>
+      Game Code: <strong>{{ gameCode }}</strong>
+    </span>
+    <span *ngIf="competitorId">
+      Competitor Id: <strong>{{ competitorId }}</strong>
+    </span>
+  </div>
+
+  <div *ngIf="gameCode && isGameEnd" class="online-mode-information">
+    The game is end
+    <span *ngIf="winner === playerId">
+      <b>Your are the winner</b>
+    </span>
+    <span *ngIf="winner === competitorId">
+      <b>Your are the loser</b>
+    </span>
+  </div>
+
+  <div *ngIf="gameCode" class="online-mode-board">
+    <mat-card>
+      <ngx-chess-board
+        #board
+        [darkTileColor]="'#b58863'"
+        [lightTileColor]="'#f0d9b5'"
+        [darkDisabled]="localTurn === 'white'"
+        [lightDisabled]="localTurn === 'black'"
+        [size]="500"
+        (moveChange)="onMoveChange()"
+      ></ngx-chess-board>
+    </mat-card>
+  </div>
+
+  <div *ngIf="isGameEnd" class="online-mode-tools">
+    <button mat-raised-button color="accent" (click)="handleStartNewGame()">
+      Start new game
+    </button>
+  </div>
 </div>
